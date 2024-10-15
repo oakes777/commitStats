@@ -6,6 +6,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        //Initializing scanner, taking input on the filename
         Scanner s = new Scanner(System.in);
 
         System.out.print("Enter the CSV filename: ");
@@ -13,6 +14,7 @@ public class Main {
 
         List<Map<String, String>> dta = new ArrayList<>();
         try (Scanner fs = new Scanner(new File(f))) {
+            //Opens file in scanner, iterates across, initializes ArrayList, coalescses stats into a hashmap, then places in an array list
             fs.nextLine();
 
             while (fs.hasNextLine()) {
