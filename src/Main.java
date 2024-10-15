@@ -12,7 +12,7 @@ public class Main {
         System.out.print("Enter the CSV filename: ");
         String f = s.nextLine();
 
-        List<Map<String, String>> dta = new ArrayList<>();
+        List<Map<String, String>> allData = new ArrayList<>();
         try (Scanner fs = new Scanner(new File(f))) {
             //Opens file in scanner, iterates across, initializes ArrayList, coalescses stats into a hashmap, then places in an array list
             fs.nextLine();
@@ -22,11 +22,11 @@ public class Main {
 
                 int chg = Integer.parseInt(v[2]);  
 
-                Map<String, String> mp1 = new HashMap<>();
-                mp1.put("id", v[0]);  
-                mp1.put("tm", v[1]);  
-                mp1.put("chg", String.valueOf(chg));
-                dta.add(mp1);
+                Map<String, String> valueMap = new HashMap<>();
+                valueMap.put("id", v[0]);  
+                valueMap.put("tm", v[1]);  
+                valueMap.put("chg", String.valueOf(chg));
+                allData.add(valueMap);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error reading the file: " + e.getMessage());
@@ -35,7 +35,7 @@ public class Main {
         }
 
         Map<String, List<Map<String, String>>> mp2 = new HashMap<>();
-        for (Map<String, String> d : dta) {
+        for (Map<String, String> d : allData) {
             String id = d.get("id");
             List<Map<String, String>> lst = mp2.get(id);
             if (lst == null) {
@@ -52,7 +52,7 @@ public class Main {
 
         List<Map<String, String>> sel;
         if (inp.equalsIgnoreCase("all")) {
-            sel = dta;
+            sel = allData;
         } else {
             String id = "fork" + inp; 
             sel = mp2.get(id);
